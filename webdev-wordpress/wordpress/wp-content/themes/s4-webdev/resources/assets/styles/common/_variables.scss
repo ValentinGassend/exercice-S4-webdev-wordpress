@@ -2,8 +2,30 @@
 @import "~bootstrap/scss/functions";
 
 $theme-colors: (
-  primary: #525ddc
+  primary: #fff
 );
+
+////color////
+$black:#1f2326;
+$white:#fff;
+$gray:#c4c4c4;
+$primary:#ff4656;
+$secondary:#f8f8f8;
+
+
+////font////
+$font-primary: "Montserrat", sans-serif;
+$font-secondary: "Raleway", sans-serif;
+
+$nav: normal normal 700 14px/100% $font-primary;
+$home_title: normal normal 900 96px/100% $font-secondary;
+$home_third_title: normal normal 900 18px/100% $font-secondary;
+
+$indiv_title: normal normal 900 18px/100% $font-secondary;
+$indiv_text: normal normal 400 10px/105% $font-primary;
+$indiv_info: normal normal 900 12px/100% $font-primary;
+$indiv_capacity: normal normal 900 14px/100% $font-secondary;
+$indiv_capacity_info: normal normal 300 10px/110% $font-primary;
 
 /** Bootstrap navbar fix (https://git.io/fADqW) */
 $navbar-dark-toggler-icon-bg: none;
