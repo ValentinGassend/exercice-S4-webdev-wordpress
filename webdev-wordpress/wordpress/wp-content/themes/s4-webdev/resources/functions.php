@@ -33,12 +33,17 @@ if (version_compare('7.1', phpversion(), '>=')) {
 if (version_compare('4.7.0', get_bloginfo('version'), '>=')) {
     $sage_error(__('You must be using WordPress 4.7.0 or greater.', 'sage'), __('Invalid WordPress version', 'sage'));
 }
-
+function debug($val)
+{
+    echo "<pre> ";
+    var_dump($val);
+    echo "</pre>";
+}
 /**
  * Ensure dependencies are loaded
  */
 if (!class_exists('Roots\\Sage\\Container')) {
-    if (!file_exists($composer = __DIR__.'/../vendor/autoload.php')) {
+    if (!file_exists($composer = __DIR__ . '/../vendor/autoload.php')) {
         $sage_error(
             __('You must run <code>composer install</code> from the Sage directory.', 'sage'),
             __('Autoloader not found.', 'sage')
@@ -46,7 +51,9 @@ if (!class_exists('Roots\\Sage\\Container')) {
     }
     require_once $composer;
 }
-
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page();
+}
 /**
  * Sage required files
  *
@@ -60,6 +67,13 @@ array_map(function ($file) use ($sage_error) {
     }
 }, ['helpers', 'setup', 'filters', 'admin']);
 
+if (!function_exists('custom_register_nav_menu')) {
+    function custom_register_nav_menu()
+    {
+        register_nav_menus(array('primary_menu' => 'Menu principal',));
+    }
+    add_action('after_setup_theme', 'custom_register_nav_menu', 0);
+}
 /**
  * Here's what's happening with these hooks:
  * 1. WordPress initially detects theme in themes/sage/resources
@@ -85,8 +99,30 @@ array_map(
 Container::getInstance()
     ->bindIf('config', function () {
         return new Config([
-            'assets' => require dirname(__DIR__).'/config/assets.php',
-            'theme' => require dirname(__DIR__).'/config/theme.php',
-            'view' => require dirname(__DIR__).'/config/view.php',
+            'assets' => require dirname(__DIR__) . '/config/assets.php',
+            'theme' => require dirname(__DIR__) . '/config/theme.php',
+            'view' => require dirname(__DIR__) . '/config/view.php',
         ]);
     }, true);
+add_action("pre_get_posts", "custom_front_page");
+function custom_front_page($wp_query)
+{
+    //Ensure this filter isn't applied to the admin area
+    if (is_admin()) {
+        return;
+    }
+
+    if ($wp_query->get('page_id') == get_option('page_on_front')) :
+
+        $wp_query->set('post_type', 'agent');
+        $wp_query->set('page_id', ''); //Empty
+
+        //Set properties that describe the page to reflect that
+        //we aren't really displaying a static page
+        $wp_query->is_page = 0;
+        $wp_query->is_singular = 0;
+        $wp_query->is_post_type_archive = 1;
+        $wp_query->is_archive = 1;
+
+    endif;
+}
