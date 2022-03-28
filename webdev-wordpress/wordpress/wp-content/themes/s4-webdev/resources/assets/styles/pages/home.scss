@@ -1,0 +1,138 @@
+.title {
+  position: relative;
+  transform: rotate(90deg) translateX(75%);
+  width: fit-content;
+  font: $home_title;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  -webkit-text-stroke: 2px $white;
+  text-align: center;
+  left: -50%;
+  height: fit-content;
+}
+
+body {
+  background-color: $primary;
+}
+
+.main {
+  margin-top: 52px;
+}
+
+.agents {
+  display: flex;
+  gap: 120px;
+
+  a {
+    text-decoration: none;
+    animation: all 250ms ease-out;
+    transition: all 250ms ease-out;
+
+    .agent {
+      width: 206px !important;
+      border: 1px $black !important;
+
+      .titles {
+        height: 100px;
+        position: relative;
+        z-index: 1;
+        transform: rotate(90deg) translateY(260%) translateX(65%);
+        width: 500px;
+
+        h2 {
+          font: $home_title;
+          font-size: 58px;
+          color: transparent;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          -webkit-text-stroke: 2px $white;
+          margin: 0;
+        }
+
+        h3 {
+          font: $home_third_title;
+          color: $primary;
+          margin: 0;
+          letter-spacing: 0.2em;
+        }
+      }
+
+      .mask {
+        background-color: $black;
+        border-radius: 5px 0 0 0;
+        width: 206px;
+        height: 462px;
+        overflow: clip;
+        border: solid 2px $gray;
+
+        img {
+          transition: all 250ms ease-out;
+          animation: all 250ms ease-out;
+          max-width: 350px;
+          min-width: 350px;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+
+    .capacitys {
+      position: relative;
+      top: -36px;
+      margin-left: 14px;
+      display: flex;
+      gap: 22px;
+      height: 52px;
+      width: 206px;
+      padding: 14px 18px;
+      background-color: $black;
+      border: solid 2px $secondary;
+      align-items: center;
+
+      .capacity {
+        height: fit-content;
+
+        img {
+          height: 24px;
+        }
+      }
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      .agent {
+        .titles {
+          h2 {
+            -webkit-text-stroke-color: $black;
+          }
+        }
+
+        .mask {
+          background-color: $white;
+          border-color: $black;
+          overflow: unset;
+
+          img {
+            transform: translateX(-50%) scale(1.1);
+            z-index: 2;
+            backdrop-filter: blur(0.75px);
+          }
+        }
+
+        .capacitys {
+          background-color: $white;
+          border-color: $black;
+
+          .capacity {
+            img {
+              filter: invert(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
