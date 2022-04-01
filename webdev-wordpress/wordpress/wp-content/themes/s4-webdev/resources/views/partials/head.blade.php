@@ -29,7 +29,7 @@
 
             <?php foreach ($nav as $key => $value) { ?>
 
-            <a class="nav-link"><?= $value["name"] ?></a>
+            <a class="nav-link" href="<?= $value["link"] ?>" target="_blank"><?= $value["name"] ?></a>
 
             <?php } ?>
 
