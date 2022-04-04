@@ -14,37 +14,50 @@ Installer les dépendances
 
 ```bash
 cd .\webdev-wordpress\wordpress\wp-content\themes\s4-webdev\
-npm i
+yarn install
 ```
 
 ## 🌳 Structure du projet
 
 ```bash
 .
-├── src
-│   │ index.html
-│   │ individual.html
+├── resources
+│   │ footer.php
+│   │ function.php
+│   │ index.php
+│   │ screenshot.png
+│   │ style.css
 │   ├── asset
+│   │   │ config.json
+│   │   ├── build
 │   │   ├── fonts
+│   │   ├── scripts
+│   │   ├── styles
 │   │   └── images
-│   ├── css
-│   │   │ app.scss
-│   │   ├── abstract
-│   │   ├── base
+│   └── views
+│   │   │ 404.blade.php
+│   │   │ archive-agent.blade.php
+│   │   │ front-page.blade.php
+│   │   │ search.blade.php
+│   │   │ single-agent.blade.php
+│   │   │ single.blade.php
+│   │   │ template-custom.blade.php
 │   │   ├── components
 │   │   ├── layout
-│   │   └── pages
-│   ├── pages
-│   └── js
-│   │   │ index.js
-│   │   │ individual.js
-│   │   │ recipe.js
-│   │   └── hbs
-└── dist
-│   │ index.html
-│   │ individual.html
-│ webpack.config.js
-│ webpack.prod.js
+│   │   └── partials
+├── resources
+│   │ assets.php
+│   │ theme.php
+│   │ view.php
+└── app
+│   │ admin.php
+│   │ helpers.php
+│   │ filters.php
+│   │ setup.php
+│   └── controllers
+│   │   │ App.php
+│   │   │ FrontPage.php
+│ yarn.lock
 ```
 
 ## 🏃 Développement
@@ -52,7 +65,7 @@ npm i
 Pour lancer le serveur de développement
 
 ```bash
-npm run start
+yarn run start
 ```
 
 ## 🚧 Build
@@ -60,5 +73,5 @@ npm run start
 Pour lancer le build du projet
 
 ```bash
-npm run build
+yarn run build
 ```
